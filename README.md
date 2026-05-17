@@ -1,2 +1,0 @@
-# ProyectoIngenieriaGrupo3UE
-Babungets
