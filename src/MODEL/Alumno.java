@@ -1,3 +1,4 @@
+package MODEL;
 public class Alumno {
     private int ID;
     private String Nombre;
@@ -16,7 +17,14 @@ public class Alumno {
         return contadorID++;
     }
 
-    public Alumno(String Nombre, String Apellido, String DNI, String Email,
+    // Permite al gestor JSON sincronizar el contador tras la carga de archivos
+    public static void sincronizarContador(int nuevoValor) {
+        if (nuevoValor > contadorID) {
+            contadorID = nuevoValor;
+        }
+    }
+
+    private Alumno(String Nombre, String Apellido, String DNI, String Email,
                   String Teléfono, int Fecha_Nacimiento, String Ciclo_formativo,
 				   int Curso, String Estado) {
         setID(generarID());
@@ -29,6 +37,21 @@ public class Alumno {
         setCiclo_formativo(Ciclo_formativo);
         setCurso(Curso);
         setEstado(Estado);
+    }
+
+    public static Alumno crearAlumno(String Nombre, String Apellido, String DNI, String Email,
+                                     String Teléfono, int Fecha_Nacimiento, String Ciclo_formativo,
+                                     int Curso, String Estado) {
+        try {
+            return new Alumno(Nombre, Apellido, DNI, Email, Teléfono, Fecha_Nacimiento, Ciclo_formativo, Curso, Estado);
+        } catch (IllegalArgumentException e) {
+            System.err.println("[VALIDACIÓN FAILED] No se pudo registrar al alumno (" + Nombre + " " + Apellido + "): " + e.getMessage());
+            
+            // Revertimos el incremento del contador estático si la instanciación falló
+            contadorID--; 
+            
+            return null; // El alumno no se crea y se retorna un valor nulo de forma controlada
+        }
     }
 
     // ── Getters ──────────────────────────────────────────

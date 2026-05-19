@@ -1,5 +1,7 @@
 package CONTROLLER.CRUD;
 import MODEL.Alumno;
+import MODEL.Matricula;
+import MODEL.Modulo_Profesional;
 import java.util.ArrayList;
 
 public class GestorAlumnos {
@@ -9,16 +11,10 @@ public class GestorAlumnos {
     // ── Create ──────────────────────────────────────────
     public void crear(String nombre, String apellido, String dni, String email,
                       String telefono, int fechaNacimiento, String ciclo, int curso, String estado) {
-        
-        Alumno alumno = Alumno.crearAlumno(nombre, apellido, dni, email, telefono, fechaNacimiento, ciclo, curso, estado);
-        
-        if (alumno != null) {
-            listaAlumnos.add(alumno);
-            System.out.println("\n¡Alumno creado exitosamente!");
-            System.out.println(alumno);
-        } else {
-            System.out.println("\n[AVISO] El registro no fue incorporado al sistema debido a los errores señalados.");
-        }
+        Alumno alumno = new Alumno(nombre, apellido, dni, email, telefono, fechaNacimiento, ciclo, curso, estado);
+        listaAlumnos.add(alumno);
+        System.out.println("\n¡Alumno creado exitosamente!");
+        System.out.println(alumno);
     }
 
     // ── Read ──────────────────────────────────────────

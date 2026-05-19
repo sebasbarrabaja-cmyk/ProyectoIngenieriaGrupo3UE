@@ -14,13 +14,32 @@ public class Matricula {
         return contadorID++;
     }
 
-    public Matricula(int ID_Alumno, int ID_Modulo, String Convocatoria, String Calificación, int Fecha_Evaluación) {
+    // Permite al gestor JSON sincronizar el contador tras la carga de archivos
+    public static void sincronizarContador(int nuevoValor) {
+        if (nuevoValor > contadorID) {
+            contadorID = nuevoValor;
+        }
+    }
+
+    // CONSTRUCTOR MODIFICADO A PRIVADO
+    private Matricula(int ID_Alumno, int ID_Modulo, String Convocatoria, String Calificación, int Fecha_Evaluación) {
         setID_Matricula(generarID());
         setID_Alumno(ID_Alumno);
         setID_Modulo(ID_Modulo);
         setConvocatoria(Convocatoria);
         setCalificación(Calificación);
         setFecha_Evaluación(Fecha_Evaluación);
+    }
+
+    // MÉTODO DE FACTORÍA ESTÁTICA
+    public static Matricula crearMatricula(int ID_Alumno, int ID_Modulo, String Convocatoria, String Calificación, int Fecha_Evaluación) {
+        try {
+            return new Matricula(ID_Alumno, ID_Modulo, Convocatoria, Calificación, Fecha_Evaluación);
+        } catch (IllegalArgumentException e) {
+            System.err.println("[VALIDACIÓN MATRÍCULA FALLIDA] " + e.getMessage());
+            contadorID--; // Reversión del identificador en caso de anomalía
+            return null;
+        }
     }
 
     // ── Getters ──────────────────────────────────────────
@@ -49,8 +68,8 @@ public class Matricula {
     }
 
     public void setConvocatoria(String convocatoria) {
-        if (convocatoria == null || !convocatoria.equalsIgnoreCase("ordinaria")
-                && !convocatoria.equalsIgnoreCase("extraordinaria")) {
+        if (convocatoria == null || (!convocatoria.equalsIgnoreCase("ordinaria")
+                && !convocatoria.equalsIgnoreCase("extraordinaria"))) {
             throw new IllegalArgumentException("La convocatoria debe ser: ordinaria o extraordinaria");
         }
         Convocatoria = convocatoria.trim().toLowerCase();

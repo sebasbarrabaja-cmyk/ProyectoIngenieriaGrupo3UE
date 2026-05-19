@@ -1,4 +1,5 @@
 package MODEL;
+
 public class Modulo_Profesional {
     private int ID_Modulo;
     private String Nombre_Modulo;
@@ -13,7 +14,15 @@ public class Modulo_Profesional {
         return contadorID++;
     }
 
-    public Modulo_Profesional(String Nombre_Modulo, String Ciclo_Perteneciente,
+    // Permite al gestor JSON sincronizar el contador tras la carga de archivos
+    public static void sincronizarContador(int nuevoValor) {
+        if (nuevoValor > contadorID) {
+            contadorID = nuevoValor;
+        }
+    }
+
+    // CONSTRUCTOR MODIFICADO A PRIVADO
+    private Modulo_Profesional(String Nombre_Modulo, String Ciclo_Perteneciente,
                                int Horas_t, String Nombre_Docente, int Curso_Imp) {
         setID_Modulo(generarID());
         setNombre_Modulo(Nombre_Modulo);
@@ -21,6 +30,18 @@ public class Modulo_Profesional {
         setHoras_t(Horas_t);
         setNombre_Docente(Nombre_Docente);
         setCurso_Imp(Curso_Imp);
+    }
+
+    // MÉTODO DE FACTORÍA ESTÁTICA
+    public static Modulo_Profesional crearModulo_Profesional(String Nombre_Modulo, String Ciclo_Perteneciente,
+                                                 int Horas_t, String Nombre_Docente, int Curso_Imp) {
+        try {
+            return new Modulo_Profesional(Nombre_Modulo, Ciclo_Perteneciente, Horas_t, Nombre_Docente, Curso_Imp);
+        } catch (IllegalArgumentException e) {
+            System.err.println("[VALIDACIÓN MÓDULO FALLIDA] " + e.getMessage());
+            contadorID--; // Reversión del identificador en caso de anomalía
+            return null;
+        }
     }
 
     // ── Getters ──────────────────────────────────────────

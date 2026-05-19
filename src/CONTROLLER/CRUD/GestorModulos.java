@@ -1,18 +1,21 @@
 package CONTROLLER.CRUD;
 
+import MODEL.Modulo_Profesional;
 import java.util.ArrayList;
+
 
 public class GestorModulos {
 
     private ArrayList<Modulo_Profesional> listaModulos = new ArrayList<>();
 
     // ── Create ──────────────────────────────────────────
-    public void crear(String nombre, String ciclo, int horas, String docente, int curso) {
-        Modulo_Profesional modulo = new Modulo_Profesional(nombre, ciclo, horas, docente, curso);
+public void crear(String nombre, String ciclo, int horas, String docente, int curso) {
+    Modulo_Profesional modulo = Modulo_Profesional.crearModulo_Profesional(nombre, ciclo, horas, docente, curso);
+    if (modulo != null) {
         listaModulos.add(modulo);
-        System.out.println("\n¡Módulo creado exitosamente!");
-        System.out.println(modulo);
+        System.out.println("Módulo procesado correctamente.");
     }
+}
 
     // ── Read ──────────────────────────────────────────
     public void listar() {

@@ -1,6 +1,7 @@
 package CONTROLLER.CRUD;
-
+import MODEL.Alumno;
 import MODEL.Matricula;
+import MODEL.Modulo_Profesional;
 import java.util.ArrayList;
 
 public class GestorMatriculas {
@@ -9,12 +10,15 @@ public class GestorMatriculas {
 
     // ── Create ──────────────────────────────────────────
     public void crear(int idAlumno, int idModulo, String convocatoria, String calificacion, int fechaEvaluacion) {
-    Matricula matricula = Matricula.crearMatricula(idAlumno, idModulo, convocatoria, calificacion, fechaEvaluacion);
-    if (matricula != null) {
+        if (convocatoria.equalsIgnoreCase("ordinaria") && existeOrdinaria(idAlumno, idModulo)) {
+            System.out.println("Error: ya existe una calificación ordinaria para este alumno en este módulo.");
+            return;
+        }
+        Matricula matricula = new Matricula(idAlumno, idModulo, convocatoria, calificacion, fechaEvaluacion);
         listaMatriculas.add(matricula);
-        System.out.println("Matrícula procesada correctamente.");
+        System.out.println("\n¡Matrícula creada exitosamente!");
+        System.out.println(matricula);
     }
-}
 
     // ── Read ──────────────────────────────────────────
     public void listar() {
