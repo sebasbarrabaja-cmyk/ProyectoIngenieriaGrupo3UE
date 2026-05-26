@@ -58,18 +58,6 @@ public class GestorMatriculas {
         return resultado;
     }
 
-    // ── Regla de negocio ──────────────────────────────────────────
-    private boolean existeOrdinaria(int idAlumno, int idModulo) {
-        for (Matricula matricula : listaMatriculas) {
-            if (matricula.getID_Alumno() == idAlumno
-                    && matricula.getID_Modulo() == idModulo
-                    && matricula.getConvocatoria().equalsIgnoreCase("ordinaria")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     // ── Update ──────────────────────────────────────────
     public void actualizar(int id, String convocatoria, String calificacion, int fechaEvaluacion) {
         Matricula matricula = buscarPorID(id);

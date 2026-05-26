@@ -1,0 +1,3 @@
+ID,Nombre,Apellido,DNI,Email,Telefono,Fecha_Nacimiento,Ciclo_Formativo,Curso,Estado
+1,mikel,fernandez,12345678Z,mikel@email.com,600111222,2005,dam,1,matriculado
+2,juan,antonio,87654321X,juan@email.com,600222333,2004,dam,1,matriculado

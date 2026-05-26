@@ -10,7 +10,7 @@ import CONTROLLER.CRUD.GestorMatriculas;
 import java.io.*;
 import java.util.ArrayList;
  
-public class CSV_Extport {
+public class CSV_Export {
  
     private static final String RUTA_CSV_ALUMNOS    = "data/alumnos.csv";
     private static final String RUTA_CSV_MODULOS    = "data/modulos.csv";
@@ -20,7 +20,7 @@ public class CSV_Extport {
     private final GestorModulos    gestorModulos;
     private final GestorMatriculas gestorMatriculas;
  
-    public CSV_Exportacion(GestorAlumnos gestorAlumnos, GestorModulos gestorModulos, GestorMatriculas gestorMatriculas) {
+    public CSV_Export(GestorAlumnos gestorAlumnos, GestorModulos gestorModulos, GestorMatriculas gestorMatriculas) {
         this.gestorAlumnos    = gestorAlumnos;
         this.gestorModulos    = gestorModulos;
         this.gestorMatriculas = gestorMatriculas;

@@ -33,10 +33,10 @@
   },
   {
     "ID_Matricula": 5,
-    "ID_Alumno": 4,
+    "ID_Alumno": 3,
     "ID_Modulo": 1,
-    "Convocatoria": "extraordinaria",
-    "Calificación": "5",
-    "Fecha_Evaluación": 2026
+    "Convocatoria": "ordinaria",
+    "Calificación": "1",
+    "Fecha_Evaluación": 2025
   }
 ]

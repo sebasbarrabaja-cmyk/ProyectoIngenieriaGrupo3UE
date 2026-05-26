@@ -16,8 +16,13 @@ import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
  
 import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.List;
+
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
  
 /**
  * ExportadorPDF
@@ -34,27 +39,37 @@ import java.util.List;
  *   </dependency>
  */
 public class PDF_Export {
- 
-    // ─── Colores corporativos ────────────────────────────────────────────────
+// ─── Colores corporativos ────────────────────────────────────────────────
     private static final DeviceRgb COLOR_CABECERA  = new DeviceRgb(30, 90, 160);   // azul oscuro
     private static final DeviceRgb COLOR_SUBTITULO = new DeviceRgb(245, 248, 255); // azul muy claro
     private static final DeviceRgb COLOR_FILA_PAR  = new DeviceRgb(235, 241, 252); // azul pálido
- 
+
     /**
      * Exporta los datos de un alumno junto con su lista de matrículas a un PDF.
+     * Almacena el resultado en la carpeta 'download' dentro del proyecto.
      *
-     * @param alumno     El alumno a imprimir.
-     * @param matriculas Lista de matrículas que pertenecen a ese alumno.
-     * @param rutaSalida Ruta del archivo PDF que se va a crear, p. ej. "alumno_12.pdf"
+     * @param alumno       El alumno a imprimir.
+     * @param matriculas   Lista de matrículas que pertenecen a ese alumno.
+     * @param nombreArchivo Nombre del archivo PDF que se va a crear, p. ej. "alumno_12.pdf"
      */
-    public static void exportarAlumno(Alumno alumno, List<Matricula> matriculas, String rutaSalida) {
- 
+    public static void exportarAlumno(Alumno alumno, List<Matricula> matriculas, String nombreArchivo) {
+
         try {
-            PdfWriter  writer  = new PdfWriter(rutaSalida);
+            // 1. Definir y asegurar la existencia de la carpeta 'download'
+            Path rutaCarpeta = Paths.get("download");
+            if (!Files.exists(rutaCarpeta)) {
+                Files.createDirectories(rutaCarpeta);
+            }
+
+            // 2. Combinar la carpeta con el nombre del archivo
+            Path rutaCompleta = rutaCarpeta.resolve(nombreArchivo);
+
+            // 3. Inicializar el escritor de iText con la ruta definitiva
+            PdfWriter  writer  = new PdfWriter(rutaCompleta.toFile());
             PdfDocument pdf    = new PdfDocument(writer);
-            Document   doc    = new Document(pdf);
+            Document   doc     = new Document(pdf);
             doc.setMargins(40, 50, 40, 50);
- 
+
             // ── 1. Cabecera ──────────────────────────────────────────────────
             Paragraph titulo = new Paragraph("FICHA DEL ALUMNO")
                     .setFontSize(20)
@@ -64,21 +79,21 @@ public class PDF_Export {
                     .setTextAlignment(TextAlignment.CENTER)
                     .setPadding(10);
             doc.add(titulo);
- 
+
             Paragraph fecha = new Paragraph("Fecha de impresión: " + LocalDate.now())
                     .setFontSize(9)
                     .setFontColor(ColorConstants.GRAY)
                     .setTextAlignment(TextAlignment.RIGHT);
             doc.add(fecha);
- 
+
             doc.add(new Paragraph(" "));  // espacio
- 
+
             // ── 2. Datos del alumno ──────────────────────────────────────────
             doc.add(seccionTitulo("Datos Personales"));
- 
+
             Table tablaAlumno = new Table(UnitValue.createPercentArray(new float[]{35, 65}))
                     .setWidth(UnitValue.createPercentValue(100));
- 
+
             agregarFila(tablaAlumno, "ID",                String.valueOf(alumno.getID()),         false);
             agregarFila(tablaAlumno, "Nombre completo",   capitalizar(alumno.getNombre()) + " " +
                                                           capitalizar(alumno.getApellido()),       true);
@@ -89,13 +104,13 @@ public class PDF_Export {
             agregarFila(tablaAlumno, "Ciclo formativo",   capitalizar(alumno.getCiclo_formativo()), false);
             agregarFila(tablaAlumno, "Curso",             String.valueOf(alumno.getCurso()) + "º", true);
             agregarFila(tablaAlumno, "Estado",            capitalizar(alumno.getEstado()),         false);
- 
+
             doc.add(tablaAlumno);
             doc.add(new Paragraph(" "));
- 
+
             // ── 3. Matrículas ────────────────────────────────────────────────
             doc.add(seccionTitulo("Matrículas"));
- 
+
             if (matriculas == null || matriculas.isEmpty()) {
                 doc.add(new Paragraph("Este alumno no tiene matrículas registradas.")
                         .setFontSize(11)
@@ -105,7 +120,7 @@ public class PDF_Export {
                 Table tablaMatriculas = new Table(
                         UnitValue.createPercentArray(new float[]{10, 15, 20, 22, 18, 15}))
                         .setWidth(UnitValue.createPercentValue(100));
- 
+
                 // Cabecera de tabla
                 String[] columnas = {"ID Mat.", "ID Alumno", "ID Módulo", "Convocatoria", "Calificación", "Año eval."};
                 for (String col : columnas) {
@@ -117,12 +132,12 @@ public class PDF_Export {
                                     .setPadding(5)
                     );
                 }
- 
+
                 // Filas de datos
                 for (int i = 0; i < matriculas.size(); i++) {
                     Matricula m = matriculas.get(i);
                     boolean   par = (i % 2 == 0);
- 
+
                     agregarCeldaTabla(tablaMatriculas, String.valueOf(m.getID_Matricula()),   par);
                     agregarCeldaTabla(tablaMatriculas, String.valueOf(m.getID_Alumno()),      par);
                     agregarCeldaTabla(tablaMatriculas, String.valueOf(m.getID_Modulo()),      par);
@@ -130,10 +145,10 @@ public class PDF_Export {
                     agregarCeldaTabla(tablaMatriculas, m.getCalificación(),                   par);
                     agregarCeldaTabla(tablaMatriculas, String.valueOf(m.getFecha_Evaluación()), par);
                 }
- 
+
                 doc.add(tablaMatriculas);
             }
- 
+
             // ── 4. Pie de página ─────────────────────────────────────────────
             doc.add(new Paragraph(" "));
             doc.add(new Paragraph("Documento generado automáticamente por el sistema de gestión.")
@@ -142,10 +157,10 @@ public class PDF_Export {
                     .setTextAlignment(TextAlignment.CENTER)
                     .setBorderTop(new SolidBorder(ColorConstants.LIGHT_GRAY, 1))
                     .setPaddingTop(6));
- 
+
             doc.close();
-            System.out.println("[PDF] Archivo generado correctamente: " + rutaSalida);
- 
+            System.out.println("[PDF] Archivo generado correctamente en: " + rutaCompleta.toAbsolutePath());
+
         } catch (IOException e) {
             System.err.println("[PDF ERROR] No se pudo generar el PDF: " + e.getMessage());
         }

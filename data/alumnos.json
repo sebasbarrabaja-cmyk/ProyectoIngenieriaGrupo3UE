@@ -14,7 +14,7 @@
   {
     "ID": 2,
     "Nombre": "juan",
-    "Apellido": "lopez",
+    "Apellido": "antonio",
     "DNI": "87654321X",
     "Email": "juan@email.com",
     "Teléfono": "600222333",
@@ -22,5 +22,17 @@
     "Ciclo_formativo": "dam",
     "Curso": 1,
     "Estado": "matriculado"
+  },
+  {
+    "ID": 3,
+    "Nombre": "ziad",
+    "Apellido": "bounouafi",
+    "DNI": "14571727P",
+    "Email": "ziadbounouafi69_xd@gmail.com",
+    "Teléfono": "613800707",
+    "Fecha_Nacimiento": 2007,
+    "Ciclo_formativo": "fpii electrónica",
+    "Curso": 1,
+    "Estado": "baja"
   }
 ]
