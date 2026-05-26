@@ -1,0 +1,26 @@
+[
+  {
+    "ID": 1,
+    "Nombre": "mikel",
+    "Apellido": "fernandez",
+    "DNI": "12345678Z",
+    "Email": "mikel@email.com",
+    "Teléfono": "600111222",
+    "Fecha_Nacimiento": 2005,
+    "Ciclo_formativo": "dam",
+    "Curso": 1,
+    "Estado": "matriculado"
+  },
+  {
+    "ID": 2,
+    "Nombre": "juan",
+    "Apellido": "lopez",
+    "DNI": "87654321X",
+    "Email": "juan@email.com",
+    "Teléfono": "600222333",
+    "Fecha_Nacimiento": 2004,
+    "Ciclo_formativo": "dam",
+    "Curso": 1,
+    "Estado": "matriculado"
+  }
+]

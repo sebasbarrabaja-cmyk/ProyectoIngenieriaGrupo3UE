@@ -4,6 +4,8 @@ import CONTROLLER.CRUD.GestorAlumnos;
 import CONTROLLER.CRUD.GestorMatriculas;
 import CONTROLLER.CRUD.GestorModulos;
 import PERSISTENCE.JSON_Persistencia;
+import java.util.List;
+import PERSISTENCE.PDF_Export;
 
 public class Main {
 
@@ -75,6 +77,15 @@ public class Main {
             System.out.println("Estado final (Laura): " + alumnoAModificar.getEstado());
             json.guardarAlumnos();
             System.out.println("[JSON] Cambios guardados en alumnos.json");
+        }
+                // ── EXPORTAR PDF ──────────────────────────────────────
+        System.out.println("\n--- EXPORTAR PDF ---");
+        Alumno alumnoParaPDF = gestorAlumnos.buscarPorID(1);
+        if (alumnoParaPDF != null) {
+            List<Matricula> matriculasParaPDF = gestorMatriculas.buscarPorAlumno(1);
+            PDF_Export.exportarAlumno(alumnoParaPDF, matriculasParaPDF, "alumno_1.pdf");
+        } else {
+            System.out.println("[PDF] No se encontró el alumno con ID 1");
         }
     }
 }

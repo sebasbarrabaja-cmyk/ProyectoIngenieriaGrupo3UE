@@ -1,0 +1,26 @@
+[
+  {
+    "ID_Modulo": 1,
+    "Nombre_Modulo": "programacion",
+    "Ciclo_Perteneciente": "dam",
+    "Horas_t": 256,
+    "Nombre_Docente": "carlos ruiz",
+    "Curso_Imp": 1
+  },
+  {
+    "ID_Modulo": 2,
+    "Nombre_Modulo": "bases de datos",
+    "Ciclo_Perteneciente": "dam",
+    "Horas_t": 192,
+    "Nombre_Docente": "ana martinez",
+    "Curso_Imp": 1
+  },
+  {
+    "ID_Modulo": 3,
+    "Nombre_Modulo": "sistemas",
+    "Ciclo_Perteneciente": "daw",
+    "Horas_t": 160,
+    "Nombre_Docente": "pedro sanchez",
+    "Curso_Imp": 1
+  }
+]
