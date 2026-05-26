@@ -1,0 +1,42 @@
+[
+  {
+    "ID_Matricula": 1,
+    "ID_Alumno": 1,
+    "ID_Modulo": 1,
+    "Convocatoria": "ordinaria",
+    "Calificación": "8.5",
+    "Fecha_Evaluación": 2026
+  },
+  {
+    "ID_Matricula": 2,
+    "ID_Alumno": 1,
+    "ID_Modulo": 2,
+    "Convocatoria": "ordinaria",
+    "Calificación": "NP",
+    "Fecha_Evaluación": 2026
+  },
+  {
+    "ID_Matricula": 3,
+    "ID_Alumno": 2,
+    "ID_Modulo": 1,
+    "Convocatoria": "ordinaria",
+    "Calificación": "6",
+    "Fecha_Evaluación": 2026
+  },
+  {
+    "ID_Matricula": 4,
+    "ID_Alumno": 2,
+    "ID_Modulo": 2,
+    "Convocatoria": "ordinaria",
+    "Calificación": "7.5",
+    "Fecha_Evaluación": 2026
+  },
+  {
+    "ID_Matricula": 5,
+    "ID_Alumno": 4,
+    "ID_Modulo": 1,
+    "Convocatoria": "extraordinaria",
+    "Calificación": "5",
+    "Fecha_Evaluación": 2026
+  }
+]
