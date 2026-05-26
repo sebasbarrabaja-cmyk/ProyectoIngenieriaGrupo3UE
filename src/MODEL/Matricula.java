@@ -109,6 +109,7 @@ public class Matricula {
                 "  Convocatoria: " + Convocatoria + "\n" +
                 "  Calificación: " + Calificación + "\n" +
                 "  Año eval.:    " + Fecha_Evaluación + "\n" +
+                "  ID:           " + ID_Matricula + "\n" +
                 "──────────────────────────────";
     }
 }

@@ -153,6 +153,7 @@ public class Alumno {
                 "  Ciclo:    " + Ciclo_formativo + "\n" +
                 "  Curso:    " + Curso + "\n" +
                 "  Estado:   " + Estado + "\n" +
+                "  ID:       " + ID + "\n" +
                 "──────────────────────────────";
     }
 }

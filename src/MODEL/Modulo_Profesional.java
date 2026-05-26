@@ -100,6 +100,7 @@ public class Modulo_Profesional {
                 "  Horas:   " + Horas_t + "h\n" +
                 "  Docente: " + Nombre_Docente + "\n" +
                 "  Curso:   " + Curso_Imp + "\n" +
+                "  ID:      " + ID_Modulo + "\n" +
                 "──────────────────────────────";
     }
 }

@@ -1,0 +1,6 @@
+ID_Matricula,ID_Alumno,ID_Modulo,Convocatoria,Calificacion,Fecha_Evaluacion
+1,1,1,ordinaria,8.5,2026
+2,1,2,ordinaria,NP,2026
+3,2,1,ordinaria,6,2026
+4,2,2,ordinaria,7.5,2026
+5,4,1,extraordinaria,5,2026
